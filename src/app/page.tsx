@@ -21,14 +21,14 @@ export default function Home() {
       </div>
 
       <div className="block1" id="container-about">
-        <h1>About Me</h1>
+        <h1><span>About</span> Me</h1>
         <p><span>Name:</span> On Chhunlin</p>
-        <p><span>Name:</span> On Chhunlin</p>
-        <p><span>Name:</span> On Chhunlin</p>
-        <p><span>Name:</span> On Chhunlin</p>
-        <p><span>Name:</span> On Chhunlin</p>
-        <p><span>Name:</span> On Chhunlin</p>
-        <p><span>Name:</span> On Chhunlin</p>
+        <p><span>Date of birth:</span> On Chhunlin</p>
+        <p><span>Adress:</span> On Chhunlin</p>
+        <p><span>Email:</span> On Chhunlin</p>
+        <p><span>Phone:</span> On Chhunlin</p>
+        <p><span>20</span> Complete project</p>
+        <button>Download my cv</button>
       </div>
     </div>
   );

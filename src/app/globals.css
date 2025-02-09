@@ -352,17 +352,33 @@ body {
     flex-direction: column; /* Switch to row for larger screens */
     text-align: left; /* Align text to the left */
     gap: 80px;
-    /* margin-top: 20px; */
     height: 1000px;
-    /* margin-top: 140px; */
+    max-width: 90%;
   }
-  #container-about h1{
+
+  #container-about h1 {
     margin-top: 35%;
     font-size: 4rem; /* Larger font for bigger screens */
     text-shadow: 2px 2px 4px rgba(192, 192, 192, 0.7), /* Default subtle gray shadow */
-               -2px -2px 4px rgba(192, 192, 192, 0.7);
+      -2px -2px 4px rgba(192, 192, 192, 0.7);
   }
-  #container-about p span{
+
+  #container-about h1 span {
+    color: yellow;
+  }
+
+  #container-about p {
+    text-align: left;
+    font-size: 1.5rem;
+    white-space: nowrap; /* Prevent text from wrapping */
+    /* overflow: hidden; Hide any overflowing text */
+    /* text-overflow: ellipsis; Add an ellipsis (...) if the text overflows */
+    /* word-wrap: break-word; Optional, breaks long words if needed */
+  }
+
+  #container-about p span {
+    text-shadow: 2px 2px 4px rgba(192, 192, 192, 0.7), /* Default subtle gray shadow */
+      -2px -2px 4px rgba(192, 192, 192, 0.7);
     font-size: 1.5rem;
     font-weight: bold;
     margin-right: 3%;
