@@ -23,12 +23,14 @@ export default function Home() {
       <div className="block1" id="container-about">
         <h1><span>About</span> Me</h1>
         <p><span>Name:</span> On Chhunlin</p>
-        <p><span>Date of birth:</span> On Chhunlin</p>
-        <p><span>Adress:</span> On Chhunlin</p>
-        <p><span>Email:</span> On Chhunlin</p>
-        <p><span>Phone:</span> On Chhunlin</p>
-        <p><span>20</span> Complete project</p>
-        <button>Download my cv</button>
+        <p><span>Date of birth:</span>26, September, 2007</p>
+        <p><span>Adress:</span>Phnom Penh city, Cambodia.</p>
+        <p><span>Email:</span>chhunlin.on@institute.pse.ngo</p>
+        <p><span>Phone:</span>+855 979033023</p>
+        <p><span>20</span> Complete projects</p>
+        <a href="path/to/yourfile.pdf" download>
+         <button>Download my CV</button>
+        </a>
       </div>
     </div>
   );

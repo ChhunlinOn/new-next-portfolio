@@ -343,6 +343,59 @@ body {
     font-size: 1rem;
   }
 }
+#container-about {
+  position: absolute;
+  top: 10%;
+  flex-direction: column; /* Switch to row for larger screens */
+  text-align: left; /* Align text to the left */
+  gap: 80px;
+  height: 1000px;
+  max-width: 90%;
+}
+
+#container-about h1 {
+  margin-top: 35%;
+  font-size: 2.5rem; /* Larger font for bigger screens */
+  text-shadow: 2px 2px 4px rgba(192, 192, 192, 0.7), /* Default subtle gray shadow */
+    -2px -2px 4px rgba(192, 192, 192, 0.7);
+}
+#container-about h1 span {
+  color: yellow;
+}
+
+#container-about p {
+  text-align: left;
+  font-size: 1.3rem;
+  white-space: nowrap; /* Prevent text from wrapping */
+  /* overflow: hidden; Hide any overflowing text */
+  /* text-overflow: ellipsis; Add an ellipsis (...) if the text overflows */
+  /* word-wrap: break-word; Optional, breaks long words if needed */
+}
+
+#container-about p span {
+  text-shadow: 2px 2px 4px rgba(192, 192, 192, 0.7), /* Default subtle gray shadow */
+    -2px -2px 4px rgba(192, 192, 192, 0.7);
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-right: 3%;
+  line-height: 3;
+}
+#container-about a button {
+  padding: 12px 24px;
+font-size: 1.2rem;
+border: none;
+border-radius: 50px;
+cursor: pointer;
+transition: all 0.3s ease;
+background-color: yellow;
+color: black;
+font-weight: bold;
+box-shadow: 0 0 15px rgba(243, 243, 243, 0.8), 0 0 30px rgba(255, 255, 254, 0.6);
+}
+#container-about a button:hover{
+background-color: white;
+transform: scale(1.05);
+}
 
 @media (min-width: 768px) {
   #container-about {
@@ -384,4 +437,21 @@ body {
     margin-right: 3%;
     line-height: 3;
   }
+  #container-about a button {
+    padding: 12px 24px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: yellow;
+  color: black;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(243, 243, 243, 0.8), 0 0 30px rgba(255, 255, 254, 0.6);
+  }
+  #container-about a button:hover{
+background-color: white;
+transform: scale(1.05);
+  }
+
 }
