@@ -18,21 +18,40 @@
   animation: zoomOut 3s ease-out; /* Smooth effect */
 }
 
-@keyframes appear {
-  from {
+@keyframes rotateToCenter {
+  0% {
+    transform: translateX(-100vw) rotate(-45deg); /* Start from left */
     opacity: 0;
-    clip-path: inset(100% 100% 0 0);
   }
-  to {
+  100% {
+    transform: translateX(0) rotate(0deg); /* Move to center */
     opacity: 1;
-    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes rotateToCenterRight {
+  0% {
+    transform: translateX(100vw) rotate(45deg); /* Start from right */
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) rotate(0deg); /* Move to center */
+    opacity: 1;
   }
 }
 
 .block1 {
-  animation: appear 10s linear;
-  animation-timeline: view();
-  animation-range: entry 0% cover 20%;
+  opacity: 0; /* Initially hidden */
+  transform: rotate(0deg); /* Start with normal rotation */
+  transition: opacity 3s, transform 3s ease-out; /* Smooth transition */
+}
+
+.block1.centered-left {
+  animation: rotateToCenter 3s ease-out forwards; /* Rotate from left */
+}
+
+.block1.centered-right {
+  animation: rotateToCenterRight 3s ease-out forwards; /* Rotate from right */
 }
 
 
@@ -400,7 +419,7 @@ transform: scale(1.05);
 @media (min-width: 768px) {
   #container-about {
     position: absolute;
-    top: 10%;
+    top: 8%;
     left: 27%;
     flex-direction: column; /* Switch to row for larger screens */
     text-align: left; /* Align text to the left */
