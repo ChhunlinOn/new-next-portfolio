@@ -49,11 +49,9 @@
 .block1.centered-left {
   animation: rotateToCenter 3s ease-out forwards; /* Rotate from left */
 }
-
+/* 
 .block1.centered-right {
-  animation: rotateToCenterRight 3s ease-out forwards; /* Rotate from right */
-}
-
+  animation: rotateToCenterRight 3s ease-out forwards; } */
 
 #tsparticles {
   position: fixed;

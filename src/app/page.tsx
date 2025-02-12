@@ -46,9 +46,10 @@ export default function Home() {
       </div>
 
       <div
-      className={`block1 ${hasScrolled ? (scrollDirection === "from-left" ? "centered-left" : "centered-right") : ""}`}
+      className={`block1 ${hasScrolled ? (scrollDirection === "from-left" ? "centered-left" : "") : ""}`}
       id="container-about"
     >
+      <div className="info">
       <h1><span>About</span> Me</h1>
       <p><span>Name:</span> On Chhunlin</p>
       <p><span>Date of birth:</span> 26, September, 2007</p>
@@ -59,6 +60,11 @@ export default function Home() {
       <a href="path/to/yourfile.pdf" download>
         <button>Download my CV</button>
       </a>
+      </div>
+      <div className="proflie-about">
+        <img src="./6a0de2691bb0b536e0f0273adcdb0678.png" alt="" />
+      </div>
+     
     </div>
     </div>
   );

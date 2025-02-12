@@ -78,8 +78,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 About
               </Link>
               <Link
-                href="#education"
-                onClick={() => handleMenuClick("Education", "#education")}
+                href="#container-skill"
+                onClick={() => handleMenuClick("Education", "#container-skill")}
                 className={activeMenu === "Education" ? "active" : ""}
               >
                 Education
