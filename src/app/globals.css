@@ -213,7 +213,7 @@ body {
 
 #container-home {
   position: absolute;
-  top:0;
+  top:-1%;
   height: 1000px;
   display: flex;
   flex-direction: column; /* Default to column for small screens */
@@ -417,14 +417,23 @@ transform: scale(1.05);
 @media (min-width: 768px) {
   #container-about {
     position: absolute;
-    top: 8%;
-    left: 27%;
-    flex-direction: column; /* Switch to row for larger screens */
+    /* top: 8%; */
+    /* left: 27%; */
+     display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
     text-align: left; /* Align text to the left */
     gap: 80px;
-    height: 1000px;
+    height: 800px;
     max-width: 90%;
   }
+#container-about .proflie-about{
+     background-color: aqua;
+     height: 300px;
+     width: 300px;
+     border-radius: 50%;
+}
 
   #container-about h1 {
     margin-top: 35%;
