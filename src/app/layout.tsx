@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Link from "next/link"; 
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import "./globals.css";
 import ParticlesBackground from "./component/ParticlesBackground";
 
@@ -8,26 +9,42 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string>("Home");
 
+  const router = useRouter();
+  const pathname = usePathname();
+
   const toggleMenu = () => setMenuOpen((prev) => !prev);
+
+  const scrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   const handleMenuClick = (menu: string, url: string) => {
     setActiveMenu(menu);
     setMenuOpen(false);
-    window.location.href = url; // Forces a full page refresh
+
+    if (url === "/") {
+      window.location.href = url; // Full page reload when clicking "Home"
+    } else if (url.startsWith("#")) {
+      scrollToSection(url.substring(1)); // Remove "#" and scroll smoothly
+    } else {
+      router.push(url); // Navigate to other pages without refresh
+    }
   };
 
-  // Track scroll position to change active menu
   useEffect(() => {
     const sections = [
       { id: "container-home", name: "Home" },
       { id: "container-about", name: "About" },
-      { id: "education", name: "Education" },
+      { id: "container-skill", name: "Education" },
       { id: "project", name: "Project" },
       { id: "contact", name: "Contact" },
     ];
 
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100; // Adjust for better accuracy (add an offset)
+      const scrollPosition = window.scrollY + 100; // Adjust offset for better accuracy
 
       for (const section of sections) {
         const element = document.getElementById(section.id);
@@ -41,64 +58,43 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    // Clean up the event listener on component unmount
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <html lang="en">
       <body>
-        {/* Full-screen particles background */}
         <ParticlesBackground />
 
         <header>
           <div id="menubar">
             <div id="name">
-              <Link href="/" onClick={() => handleMenuClick("Home", "/")}>On <span style={{color:"yellow"}}>Chhunlin</span></Link>
+              <Link href="/" onClick={(e) => { e.preventDefault(); handleMenuClick("Home", "/"); }}>
+                On <span style={{ color: "yellow" }}>Chhunlin</span>
+              </Link>
             </div>
             <div id="hamburger" onClick={toggleMenu}>
               <div></div>
               <div></div>
               <div></div>
             </div>
-            <div id="menus" className={menuOpen ? "mobile" : ""}>
-              <Link
-                href="/"
-                onClick={() => handleMenuClick("Home", "/")}
-                className={activeMenu === "Home" ? "active" : ""}
-              >
+            <nav id="menus" className={menuOpen ? "mobile" : ""}>
+              <Link href="/" onClick={(e) => { e.preventDefault(); handleMenuClick("Home", "/"); }} className={activeMenu === "Home" ? "active" : ""}>
                 Home
               </Link>
-              <Link
-                href="#container-about"
-                onClick={() => handleMenuClick("About", "#container-about")}
-                className={activeMenu === "About" ? "active" : ""}
-              >
+              <Link href="#container-about" onClick={(e) => { e.preventDefault(); handleMenuClick("About", "#container-about"); }} className={activeMenu === "About" ? "active" : ""}>
                 About
               </Link>
-              <Link
-                href="#container-skill"
-                onClick={() => handleMenuClick("Education", "#container-skill")}
-                className={activeMenu === "Education" ? "active" : ""}
-              >
-                Education
-              </Link>
-              <Link
-                href="#project"
-                onClick={() => handleMenuClick("Project", "#project")}
-                className={activeMenu === "Project" ? "active" : ""}
-              >
+              <Link href="#container-project" onClick={(e) => { e.preventDefault(); handleMenuClick("Project", "#container-project"); }} className={activeMenu === "Project" ? "active" : ""}>
                 Project
               </Link>
-              <Link
-                href="#contact"
-                onClick={() => handleMenuClick("Contact", "#contact")}
-                className={activeMenu === "Contact" ? "active" : ""}
-              >
+              <Link href="#project" onClick={(e) => { e.preventDefault(); handleMenuClick("Education", "#project"); }} className={activeMenu === "Education" ? "active" : ""}>
+                Skill
+              </Link>
+              <Link href="#contact" onClick={(e) => { e.preventDefault(); handleMenuClick("Contact", "#contact"); }} className={activeMenu === "Contact" ? "active" : ""}>
                 Contact
               </Link>
-            </div>
+            </nav>
           </div>
         </header>
 
