@@ -4,19 +4,28 @@ import "./globals.css"; // Ensure correct path
 
 export default function Home() {
   const [animateAbout, setAnimateAbout] = useState(false);
+  const [animateProject, setAnimateProject] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const aboutSection = document.getElementById("container-about");
+      const projectSection = document.getElementById("container-project");
+
       if (aboutSection) {
         const rect = aboutSection.getBoundingClientRect();
-        // Check if the section is in view (with some buffer for scroll position)
         if (rect.top < window.innerHeight * 0.3) {
-          // Add delay before triggering animation
-          setTimeout(() => setAnimateAbout(true), 500); // 500ms delay when entering
+          setTimeout(() => setAnimateAbout(true), 500);
         } else {
-          // Add delay before resetting animation
-          setTimeout(() => setAnimateAbout(false), 500); // 500ms delay when leaving
+          setTimeout(() => setAnimateAbout(false), 500);
+        }
+      }
+
+      if (projectSection) {
+        const rect = projectSection.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.3) {
+          setTimeout(() => setAnimateProject(true), 500);
+        } else {
+          setTimeout(() => setAnimateProject(false), 500);
         }
       }
     };
@@ -29,6 +38,37 @@ export default function Home() {
     };
   }, []);
 
+  const [showAll, setShowAll] = useState(false);
+
+  // Sample items array - replace with your actual data
+  const items = [
+    { id: 1, title: "Payment", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna.", imgSrc: "./picture.png" },
+    { id: 2, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
+    { id: 3, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
+    { id: 4, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
+    { id: 5, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
+    { id: 6, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
+    { id: 7, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
+    { id: 8, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
+    { id: 9, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
+    { id: 10, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" }
+  ];
+
+  // Toggle showAll state
+  const handleToggle = () => setShowAll(!showAll);
+
+  // Determine items to display
+  const displayedItems = showAll ? items : items.slice(0, 3);
+
+  const [expandedDescription, setExpandedDescription] = useState<number | null>(null); // Track which item's description is expanded
+
+  const handleReadMoreToggle = (id: number) => {
+    if (expandedDescription === id) {
+      setExpandedDescription(null); // Collapse description
+    } else {
+      setExpandedDescription(id); // Expand description
+    }
+  };
   return (
     <div id="text">
       <div id="container-home" className="block">
@@ -36,7 +76,7 @@ export default function Home() {
           <img src="null" alt="" />
         </div>
         <div id="intro">
-          <h1>Hi! I'm <span className="text-ani" style={{color:"yellow"}}>Chhunlin</span></h1>
+          <h1>Hi! I'm <span className="text-ani" style={{ color: "yellow" }}>Chhunlin</span></h1>
           <p>I'm a Full Stack Dev</p>
           <div className="button">
             <button>Hire Me</button>
@@ -66,9 +106,35 @@ export default function Home() {
         </div>
       </div>
 
-      <div id="container-project">
-
+      <div id="container-project" className={`block1 ${animateProject ? "centered-left" : ""}`}>
+        <div className="all-items">
+      {displayedItems.map((item) => (
+        <div key={item.id} className="each-box">
+          <img src={item.imgSrc} alt="" />
+          <h1>{item.title}</h1>
+          <p>
+              {expandedDescription === item.id
+                ? item.description
+                : item.description.length > 100
+                ? item.description.slice(0, 50) + '...'
+                : item.description}
+            </p>
+            {item.description.length > 100 && (
+              <button
+                className="read-more-less-btn"
+                onClick={() => handleReadMoreToggle(item.id)}
+              >
+                {expandedDescription === item.id ? 'Read Less' : 'Read More'}
+              </button>
+            )}
+        </div>
+      ))}
       </div>
+      <button className="show-button" onClick={handleToggle}>
+        {showAll ? "Show Less" : "Show More"}
+      </button>
+      </div>
+
     </div>
   );
 }

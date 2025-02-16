@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     const sections = [
       { id: "container-home", name: "Home" },
       { id: "container-about", name: "About" },
-      { id: "container-skill", name: "Education" },
+      { id: "container-project", name: "Project" },
       { id: "project", name: "Project" },
       { id: "contact", name: "Contact" },
     ];
