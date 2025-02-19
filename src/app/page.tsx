@@ -135,6 +135,41 @@ export default function Home() {
       </button>
       </div>
 
+      <div className="banner">
+      <div className="slider" style={{ ['--quantity' as any]: 10 }}>
+        <div className="items" style={{ ['--position' as any]: 1 }}>
+          <img src="./picture.png" alt="" />
+        </div>
+        <div className="items" style={{ ['--position' as any]: 2 }}>
+          <img src="./picture.png" alt="" />
+        </div>
+        <div className="items" style={{ ['--position' as any]: 3 }}>
+          <img src="./picture.png" alt="" />
+        </div>
+        <div className="items" style={{ ['--position' as any]: 4 }}>
+          <img src="./picture.png" alt="" />
+        </div>
+        <div className="items" style={{ ['--position' as any]: 5 }}>
+          <img src="./picture.png" alt="" />
+        </div>
+        <div className="items" style={{ ['--position' as any]: 6 }}>
+          <img src="./picture.png" alt="" />
+        </div>
+        <div className="items" style={{ ['--position' as any]: 7 }}>
+          <img src="./picture.png" alt="" />
+        </div>
+        <div className="items" style={{ ['--position' as any]: 8 }}>
+          <img src="./picture.png" alt="" />
+        </div>
+        <div className="items" style={{ ['--position' as any]: 9 }}>
+          <img src="./picture.png" alt="" />
+        </div>
+        <div className="items" style={{ ['--position' as any]: 10 }}>
+          <img src="./picture.png" alt="" />
+        </div>
+      </div>
+    </div>
+
     </div>
   );
 }

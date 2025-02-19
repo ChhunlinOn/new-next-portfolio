@@ -668,6 +668,12 @@ transform: scale(1.05);
 
 /* Responsive styles */
 @media (min-width: 768px) {
+  #container-project {
+    top: 16%;
+  }
+  .all-items{
+margin-top: 15%;
+  } 
   .each-box {
     width: calc(33.333% - 20px); /* Three items per row with spacing */
   }
@@ -679,3 +685,50 @@ transform: scale(1.05);
   }
 }
 
+
+.banner {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.banner .slider {
+  position: relative;
+  width: 200px;
+  height: 250px;
+  transform-style: preserve-3d;
+  animation: autoRun 80s linear infinite;
+}
+
+.banner .slider .items {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: 
+      rotateY(calc(var(--position) * (360deg / var(--quantity)))) 
+      translateZ(400px); /* Adjust this for better 3D depth */
+  transition: transform 1s;
+}
+
+.banner .slider .items img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* 🔄 Keyframes for rotation */
+@keyframes autoRun {
+  from {
+      transform: perspective(1000px) rotateY(0deg);
+  }
+  to {
+      transform: perspective(1000px) rotateY(360deg);
+  }
+}
