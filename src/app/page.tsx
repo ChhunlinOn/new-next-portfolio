@@ -58,7 +58,7 @@ export default function Home() {
   const handleToggle = () => setShowAll(!showAll);
 
   // Determine items to display
-  const displayedItems = showAll ? items : items.slice(0, 3);
+  const displayedItems = showAll ? items : items.slice(0, 6);
 
   const [expandedDescription, setExpandedDescription] = useState<number | null>(null); // Track which item's description is expanded
 
@@ -80,7 +80,7 @@ export default function Home() {
           <p>I'm a Full Stack Dev</p>
           <div className="button">
             <button>Hire Me</button>
-            <button>My Project</button>
+            <button>Projects</button>
           </div>
         </div>
       </div>
