@@ -556,12 +556,22 @@ transform: scale(1.05);
   position: absolute;
   top: 18%;
   min-height: 1000px;
-  max-width: 1000px;
+  max-width: 1050px;
   width: 100%;
 }
 
 /* Customize the swiper button */
+@media (min-width: 1024px) {
+  .large-screen-only {
+    display: block;
+  }
+}
 
+@media (max-width: 1023px) {
+  .large-screen-only {
+    display: none;
+  }
+}
 
 .all-items {
   display: flex;
@@ -573,6 +583,11 @@ transform: scale(1.05);
   width: 100%;
   box-sizing: border-box;
 }
+/* .project-slider-container {
+  position: relative;
+  display: flex;
+  justify-content: center;  
+} */
 .project-h1 {
   font-size: 2rem;
   text-shadow: 2px 2px 4px rgba(192, 192, 192, 0.7), -2px -2px 4px rgba(192, 192, 192, 0.7);
@@ -596,6 +611,19 @@ transform: scale(1.05);
   min-height: 200px;
   box-sizing: border-box;
   box-shadow: 0 0 10px rgba(243, 243, 243, 0.5), 0 0 20px rgba(255, 255, 254, 0.3);
+}
+
+/* Adjust Swiper container to allow items to be centered */
+.swiper-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Ensure navigation buttons are placed properly without overlapping */
+.swiper-button-next,
+.swiper-button-prev {
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .each-box:hover {
@@ -714,3 +742,5 @@ transform: scale(1.05);
       transform: perspective(1000px) rotateY(360deg);
   }
 }
+
+

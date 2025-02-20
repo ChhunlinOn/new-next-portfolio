@@ -11,10 +11,17 @@ export default function Home() {
   const [animateProject, setAnimateProject] = useState(false);
 
   const [progress, setProgress] = useState(0); 
+
+  // const handleSlideChange = (swiper:any) => {
+  //   const totalSlides = swiper.slides.length;
+  //   const currentIndex = swiper.activeIndex;
+  //   const newProgress = ((currentIndex + 1) / totalSlides) * 100;
+  //   setProgress(newProgress);
+  // };
   
  
   const sliderSettings = {
-    slidesPerView: 1,
+    slidesPerView: 1, // Default: 1 item for small screens
     spaceBetween: 10,
     loop: false,
     autoplay: {
@@ -22,32 +29,32 @@ export default function Home() {
       disableOnInteraction: false,
     },
     modules: [Navigation],
-    navigation: false, // No navigation buttons
+    navigation: true, // Enable navigation buttons
     breakpoints: {
       1024: {
-        slidesPerView: 3,
-        spaceBetween: 20,
+        slidesPerView: 2, // 2 items in view for large screens
+        spaceBetween: 20, // Adjust the space between items
         autoplay: false,
-        navigation: false,
       },
       600: {
-        slidesPerView: 1,
+        slidesPerView: 1, // 1 item in view for smaller screens
         spaceBetween: 10,
         autoplay: {
           delay: 2500,
           disableOnInteraction: false,
         },
-        navigation: false,
       },
     },
-    onSlideChange: (swiper:any) => {
-      const totalSlides = swiper.slides.length;
-      const currentSlide = swiper.realIndex + 1; // Real index accounts for looping
-      const progressBarWidth = (currentSlide / totalSlides) * 100;
-      setProgress(progressBarWidth); // Update progress based on slide index
+    onSwiper: (swiper:any) => {
+      swiper.on('slideChange', () => {
+        const totalSlides = swiper.slides.length - Math.floor(swiper.params.slidesPerView) + 1;
+        const currentSlide = swiper.activeIndex + 1;
+        const progressBarWidth = (currentSlide / totalSlides) * 100;
+        setProgress(progressBarWidth);
+      });
     },
   };
-
+  
   useEffect(() => {
     const handleScroll = () => {
       const aboutSection = document.getElementById("container-about");
@@ -149,45 +156,49 @@ export default function Home() {
 
       
       
-      <div id="container-project" className="project-slider-container">
-        <h1 className="project-h1">Projects</h1>
-        <Swiper {...sliderSettings} onSlideChange={(swiper) => sliderSettings.onSlideChange(swiper)}>
-          {displayedItems.map((item) => (
-            <SwiperSlide key={item.id} className="each-box">
-              <img src={item.imgSrc} alt={item.title} />
-              <h1>{item.title}</h1>
-              <p>
-                {expandedDescription === item.id
-                  ? item.description
-                  : item.description.length > 100
-                  ? item.description.slice(0, 50) + "..."
-                  : item.description}
-              </p>
-              {item.description.length > 100 && (
-                <button
-                  className="read-more-less-btn"
-                  onClick={() => handleReadMoreToggle(item.id)}
-                >
-                  {expandedDescription === item.id ? "Read Less" : "Read More"}
-                </button>
-              )}
-            </SwiperSlide>
-          ))}
-        </Swiper>
-
-        {/* Progress Bar */}
-        <div style={{ width: "100%", height: "4px", backgroundColor: "gray", marginTop: "10px" }}>
-          <div
-            style={{
-              width: `${progress}%`,
-              height: "100%",
-              backgroundColor: "white",
-              transition: "width 0.3s ease",
-            }}
-          ></div>
-        </div>
+     <div id="container-project" className="project-slider-container">
+      <h1 className="project-h1">Projects</h1>
+      <div className="all-items">
+      <Swiper {...sliderSettings}>
+        {displayedItems.map((item) => (
+          <SwiperSlide key={item.id} className="each-box">
+            <img src={item.imgSrc} alt={item.title} />
+            <h1>{item.title}</h1>
+            <p>
+              {expandedDescription === item.id
+                ? item.description
+                : item.description.length > 100
+                ? item.description.slice(0, 50) + "..."
+                : item.description}
+            </p>
+            {item.description.length > 100 && (
+              <button
+                className="read-more-less-btn"
+                onClick={() => handleReadMoreToggle(item.id)}
+              >
+                {expandedDescription === item.id ? "Read Less" : "Read More"}
+              </button>
+            )}
+          </SwiperSlide>
+        ))}
+      </Swiper>
       </div>
 
+      {/* Navigation Buttons for Large Screens */}
+      {/* <div className="swiper-button-next large-screen-only"></div>
+      <div className="swiper-button-prev large-screen-only"></div> */}
+      {/* Progress Bar */}
+      <div style={{ width: "100%", height: "4px", backgroundColor: "gray", marginTop: "10px" }}>
+        <div
+          style={{
+            width: `${progress}%`,
+            height: "100%",
+            backgroundColor: "white",
+            transition: "width 0.3s ease-in-out",
+          }}
+        ></div>
+      </div>
+    </div>
      
      <div id="container-skill">
       <div className="banner">
