@@ -1,10 +1,52 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import "./globals.css"; // Ensure correct path
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css/navigation'; // Import navigation styles
+
 
 export default function Home() {
   const [animateAbout, setAnimateAbout] = useState(false);
   const [animateProject, setAnimateProject] = useState(false);
+
+  const [progress, setProgress] = useState(0); 
+  
+ 
+  const sliderSettings = {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    loop: false,
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    modules: [Navigation],
+    navigation: false, // No navigation buttons
+    breakpoints: {
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+        autoplay: false,
+        navigation: false,
+      },
+      600: {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        autoplay: {
+          delay: 2500,
+          disableOnInteraction: false,
+        },
+        navigation: false,
+      },
+    },
+    onSlideChange: (swiper:any) => {
+      const totalSlides = swiper.slides.length;
+      const currentSlide = swiper.realIndex + 1; // Real index accounts for looping
+      const progressBarWidth = (currentSlide / totalSlides) * 100;
+      setProgress(progressBarWidth); // Update progress based on slide index
+    },
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,7 +93,6 @@ export default function Home() {
     { id: 7, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
     { id: 8, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
     { id: 9, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
-    { id: 10, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" }
   ];
 
   // Toggle showAll state
@@ -106,35 +147,49 @@ export default function Home() {
         </div>
       </div>
 
-      <div id="container-project" className={`block1 ${animateProject ? "centered-left" : ""}`}>
-        <div className="all-items">
-      {displayedItems.map((item) => (
-        <div key={item.id} className="each-box">
-          <img src={item.imgSrc} alt="" />
-          <h1>{item.title}</h1>
-          <p>
-              {expandedDescription === item.id
-                ? item.description
-                : item.description.length > 100
-                ? item.description.slice(0, 50) + '...'
-                : item.description}
-            </p>
-            {item.description.length > 100 && (
-              <button
-                className="read-more-less-btn"
-                onClick={() => handleReadMoreToggle(item.id)}
-              >
-                {expandedDescription === item.id ? 'Read Less' : 'Read More'}
-              </button>
-            )}
+      
+      
+      <div id="container-project" className="project-slider-container">
+        <h1 className="project-h1">Projects</h1>
+        <Swiper {...sliderSettings} onSlideChange={(swiper) => sliderSettings.onSlideChange(swiper)}>
+          {displayedItems.map((item) => (
+            <SwiperSlide key={item.id} className="each-box">
+              <img src={item.imgSrc} alt={item.title} />
+              <h1>{item.title}</h1>
+              <p>
+                {expandedDescription === item.id
+                  ? item.description
+                  : item.description.length > 100
+                  ? item.description.slice(0, 50) + "..."
+                  : item.description}
+              </p>
+              {item.description.length > 100 && (
+                <button
+                  className="read-more-less-btn"
+                  onClick={() => handleReadMoreToggle(item.id)}
+                >
+                  {expandedDescription === item.id ? "Read Less" : "Read More"}
+                </button>
+              )}
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        {/* Progress Bar */}
+        <div style={{ width: "100%", height: "4px", backgroundColor: "gray", marginTop: "10px" }}>
+          <div
+            style={{
+              width: `${progress}%`,
+              height: "100%",
+              backgroundColor: "white",
+              transition: "width 0.3s ease",
+            }}
+          ></div>
         </div>
-      ))}
-      </div>
-      <button className="show-button" onClick={handleToggle}>
-        {showAll ? "Show Less" : "Show More"}
-      </button>
       </div>
 
+     
+     <div id="container-skill">
       <div className="banner">
       <div className="slider" style={{ ['--quantity' as any]: 10 }}>
         <div className="items" style={{ ['--position' as any]: 1 }}>
@@ -167,6 +222,7 @@ export default function Home() {
         <div className="items" style={{ ['--position' as any]: 10 }}>
           <img src="./picture.png" alt="" />
         </div>
+      </div>
       </div>
     </div>
 
