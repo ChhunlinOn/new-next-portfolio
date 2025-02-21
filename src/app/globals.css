@@ -551,142 +551,90 @@ transform: scale(1.05);
 
 }
 
-#container-project {
-  background-color: none;
-  position: absolute;
-  top: 18%;
-  min-height: 1000px;
-  max-width: 1050px;
-  width: 100%;
+.slider-wrapper {
+  overflow: hidden;
+  max-width: 1200px;
+  margin: 0 70px 55px;
 }
-
-/* Customize the swiper button */
-@media (min-width: 1024px) {
-  .large-screen-only {
-    display: block;
+.card-list .card-item {
+  height: auto;
+  color: #fff;
+  user-select: none;
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  backdrop-filter: blur(30px);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+@media screen and (min-width: 1536px) {
+  .swiper-wrapper {
+    margin: auto; /* Ensure the swiper items stay centered */
   }
 }
+.card-list .card-item .user-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 40px;
+  border: 3px solid #fff;
+  padding: 4px;
+}
+.card-list .card-item .user-profession {
+  font-size: 1.15rem;
+  color: #e3e3e3;
+  font-weight: 500;
+  margin: 14px 0 40px;
+}
+.card-list .card-item .message-button {
+  font-size: 1.25rem;
+  padding: 10px 35px;
+  color: #030728;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid transparent;
+  transition: 0.2s ease;
+}
+.card-list .card-item .message-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #fff;
+  color: #fff;
+}
+.custom-swiper-container .swiper-pagination-bullet {
+  width: 14px !important;
+  height: 14px !important;
+  background-color: white !important;
+  opacity: 0.6 !important;
+}
 
-@media (max-width: 1023px) {
-  .large-screen-only {
+.custom-swiper-container .swiper-pagination-bullet-active {
+  width: 30px !important;
+  height: 30px !important;
+  background-color: white !important;
+  opacity: 2 !important;
+}
+
+.slider-wrapper .swiper-slide-button {
+  color: #fff;
+  margin-top: -55px;
+  transition: 0.2s ease;
+}
+.slider-wrapper .swiper-slide-button:hover {
+  color: #4658ff;
+}
+@media (max-width: 768px) {
+  .slider-wrapper {
+    margin: 0 10px 40px;
+  }
+  .slider-wrapper .swiper-slide-button {
     display: none;
   }
 }
-
-.all-items {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px;
-  text-align: center;
-  width: 100%;
-  box-sizing: border-box;
-}
-/* .project-slider-container {
-  position: relative;
-  display: flex;
-  justify-content: center;  
-} */
-.project-h1 {
-  font-size: 2rem;
-  text-shadow: 2px 2px 4px rgba(192, 192, 192, 0.7), -2px -2px 4px rgba(192, 192, 192, 0.7);
-  margin-bottom: 20px;
-}
-
-.each-box {
-  border: 2px solid white;
-  background-color: none;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  transition: all 0.3s ease;
-  width: 100%;
-  max-width: 300px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  height: auto;
-  min-height: 200px;
-  box-sizing: border-box;
-  box-shadow: 0 0 10px rgba(243, 243, 243, 0.5), 0 0 20px rgba(255, 255, 254, 0.3);
-}
-
-/* Adjust Swiper container to allow items to be centered */
-.swiper-container {
-  display: flex;
-  justify-content: center;
-}
-
-/* Ensure navigation buttons are placed properly without overlapping */
-.swiper-button-next,
-.swiper-button-prev {
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.each-box:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.each-box img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
-
-.each-box h1 {
-  font-size: 24px;
-  color: white;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-.each-box p {
-  font-size: 16px;
-  color: #928c8c;
-  line-height: 1.5;
-  margin-bottom: 20px;
-}
-
-.read-more-less-btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  font-size: 14px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: background-color 0.3s ease;
-}
-
-.read-more-less-btn:hover {
-  background-color: #0056b3;
-}
-
-.read-more-less-btn:focus {
-  outline: none;
-}
-
-@media (min-width: 768px) {
-  #container-project {
-    top: 16%;
-  }
-  .project-h1 {
-    font-size: 4rem;
-    margin-top: 15%;
-  }
-}
-
-@media (min-width: 1200px) {
-  .each-box {
-    width: calc(33.333% - 20px);
-  }
-}
-
 
 #container-skill{
   background-color: none;

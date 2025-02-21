@@ -1,9 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Navigation } from 'swiper/modules';
-import 'swiper/css';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css/navigation'; // Import navigation styles
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import './globals.css'
 
 
 export default function Home() {
@@ -19,41 +21,6 @@ export default function Home() {
   //   setProgress(newProgress);
   // };
   
- 
-  const sliderSettings = {
-    slidesPerView: 1, // Default: 1 item for small screens
-    spaceBetween: 10,
-    loop: false,
-    autoplay: {
-      delay: 2500,
-      disableOnInteraction: false,
-    },
-    modules: [Navigation],
-    navigation: true, // Enable navigation buttons
-    breakpoints: {
-      1024: {
-        slidesPerView: 2, // 2 items in view for large screens
-        spaceBetween: 20, // Adjust the space between items
-        autoplay: false,
-      },
-      600: {
-        slidesPerView: 1, // 1 item in view for smaller screens
-        spaceBetween: 10,
-        autoplay: {
-          delay: 2500,
-          disableOnInteraction: false,
-        },
-      },
-    },
-    onSwiper: (swiper:any) => {
-      swiper.on('slideChange', () => {
-        const totalSlides = swiper.slides.length - Math.floor(swiper.params.slidesPerView) + 1;
-        const currentSlide = swiper.activeIndex + 1;
-        const progressBarWidth = (currentSlide / totalSlides) * 100;
-        setProgress(progressBarWidth);
-      });
-    },
-  };
   
   useEffect(() => {
     const handleScroll = () => {
@@ -86,28 +53,15 @@ export default function Home() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const [showAll, setShowAll] = useState(false);
-
-  // Sample items array - replace with your actual data
-  const items = [
-    { id: 1, title: "Payment", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna.", imgSrc: "./picture.png" },
-    { id: 2, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
-    { id: 3, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
-    { id: 4, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
-    { id: 5, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
-    { id: 6, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
-    { id: 7, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
-    { id: 8, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
-    { id: 9, title: "Payment", description: "jkdjdjkksjdh", imgSrc: "./picture.png" },
+  
+  const cards = [
+    { id: 1, image: "images/img-1.jpg", name: "James Wilson", profession: "Software Developer" },
+    { id: 2, image: "images/img-2.jpg", name: "Sarah Johnson", profession: "Graphic Designer" },
+    { id: 3, image: "images/img-3.jpg", name: "Michael Brown", profession: "Project Manager" },
+    { id: 4, image: "images/img-4.jpg", name: "Emily Davis", profession: "Marketing Specialist" },
+    { id: 5, image: "images/img-5.jpg", name: "Christopher Garcia", profession: "Data Scientist" },
+    { id: 6, image: "images/img-6.jpg", name: "Richard Wilson", profession: "Product Designer" },
   ];
-
-  // Toggle showAll state
-  const handleToggle = () => setShowAll(!showAll);
-
-  // Determine items to display
-  const displayedItems = showAll ? items : items.slice(0, 6);
-
   const [expandedDescription, setExpandedDescription] = useState<number | null>(null); // Track which item's description is expanded
 
   const handleReadMoreToggle = (id: number) => {
@@ -156,49 +110,36 @@ export default function Home() {
 
       
       
-     <div id="container-project" className="project-slider-container">
-      <h1 className="project-h1">Projects</h1>
-      <div className="all-items">
-      <Swiper {...sliderSettings}>
-        {displayedItems.map((item) => (
-          <SwiperSlide key={item.id} className="each-box">
-            <img src={item.imgSrc} alt={item.title} />
-            <h1>{item.title}</h1>
-            <p>
-              {expandedDescription === item.id
-                ? item.description
-                : item.description.length > 100
-                ? item.description.slice(0, 50) + "..."
-                : item.description}
-            </p>
-            {item.description.length > 100 && (
-              <button
-                className="read-more-less-btn"
-                onClick={() => handleReadMoreToggle(item.id)}
-              >
-                {expandedDescription === item.id ? "Read Less" : "Read More"}
-              </button>
-            )}
+      <div className="swiper">
+      <div className="slider-wrapper">
+        <Swiper
+          modules={[Navigation, Pagination]}
+          spaceBetween={30}
+          loop={true}
+          grabCursor={true}
+        pagination={{ clickable: true, dynamicBullets: true, renderBullet: (index, className) => `<span class='${className}' style='background-color: white;'></span>` }}
+        navigation={{ nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }}
+        breakpoints={{
+          0: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        }}
+        className="card-list swiper-wrapper"
+      >
+        {cards.map((card) => (
+          <SwiperSlide key={card.id} className="card-item swiper-slide">
+            <img src={card.image} alt={card.name} className="user-image" />
+            <h2 className="user-name">{card.name}</h2>
+            <p className="user-profession">{card.profession}</p>
+            <button className="message-button">Message</button>
           </SwiperSlide>
         ))}
       </Swiper>
-      </div>
-
-      {/* Navigation Buttons for Large Screens */}
-      {/* <div className="swiper-button-next large-screen-only"></div>
-      <div className="swiper-button-prev large-screen-only"></div> */}
-      {/* Progress Bar */}
-      <div style={{ width: "100%", height: "4px", backgroundColor: "gray", marginTop: "10px" }}>
-        <div
-          style={{
-            width: `${progress}%`,
-            height: "100%",
-            backgroundColor: "white",
-            transition: "width 0.3s ease-in-out",
-          }}
-        ></div>
-      </div>
+      <div className="swiper-pagination"></div>
+      <div className="swiper-slide-button swiper-button-prev"></div>
+      <div className="swiper-slide-button swiper-button-next"></div>
     </div>
+  </div>
      
      <div id="container-skill">
       <div className="banner">
